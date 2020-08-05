@@ -1,0 +1,32 @@
+{
+  "installOptions":
+  {
+    "sourceMap": true,
+    "dest": "/web_modules",
+    "installTypes":true,
+    "alias": {
+      "@dpanet/prayers-lib": "@dpanet/prayers-lib"
+    }
+  },
+  "exclude":[
+     "!**/lib/public/js/**/*",
+    "**/node_modules/**/*",
+    "**/src/**/*"
+
+  ],
+  "install":[
+    "es-module-shims"]
+  ,
+  "proxy": {
+    
+    "/login": "http://localhost/login"
+  },
+  "buildOptions": { "clean":true },
+  "scripts":
+  {
+    
+    "run:tsc::watch": "$1 --watch",
+    "mount:*": "mount . --to /"
+  }
+
+}
