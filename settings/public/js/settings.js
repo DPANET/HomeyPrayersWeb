@@ -1,9 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 //import $ = require('jquery');
-import * as prayerlib from "@dpanet/prayers-lib/lib/entities/prayer";
-import * as prayerConfigValidator from "@dpanet/prayers-lib/lib/validators/validator";
-import moment from "moment";
-import Noty from "noty";
-import google from "@google/maps";
+const moment_1 = __importDefault(require("moment"));
+const noty_1 = __importDefault(require("noty"));
+const prayerlib = __importStar(require("@dpanet/prayers-lib/lib/entities/prayer"));
+const prayerConfigValidator = __importStar(require("@dpanet/prayers-lib/lib/validators/validator"));
+const google = require("@google/maps");
 //import { isNullOrUndefined } from 'util';
 // const DataTable = require("datatables.net")(window, $);
 //const daterangepicker = require("daterangepicker");
@@ -11,7 +23,7 @@ import google from "@google/maps";
 // const DataTableRowGroup = require("datatables.net-rowgroup")(window, $);
 //var mainURL=`${location.origin}/api/app/com.dev.prayerssapp` ;
 var mainURL = 'http://192.168.86.81/api/app/com.dev.prayerssapp';
-export async function buildObject() {
+async function buildObject() {
     let noty;
     await $('document').ready(async () => {
         try {
@@ -27,6 +39,7 @@ export async function buildObject() {
         }
     });
 }
+exports.buildObject = buildObject;
 async function loadPrayerLocation() {
     return await $.ajax({
         url: `${mainURL}/PrayerManager/PrayersLocation`,
@@ -47,8 +60,8 @@ function initForm() {
     $("#submit-button").on("click", saveDataTable);
     $('#load-button').on("click", reloadSettings);
     $('input[name="daterangepicker"]').daterangepicker({
-        startDate: moment(new Date()),
-        endDate: moment(new Date()).add(1, "M") //moment(prayerSettings.endDate)
+        startDate: moment_1.default(new Date()),
+        endDate: moment_1.default(new Date()).add(1, "M") //moment(prayerSettings.endDate)
     });
     $('#search-button').on("click", searchLocation);
     // initMap();
@@ -105,7 +118,7 @@ function notify(type, message) {
     noty.show();
 }
 function loadNotification() {
-    return new Noty({
+    return new noty_1.default({
         layout: 'top',
         theme: "bootstrap-v4",
         type: "error",

@@ -1,15 +1,27 @@
-import express from "express";
-import config from "nconf";
-import path from "path";
-import * as exceptionMiddleware from "../middlewares/exceptions.middleware.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const nconf_1 = __importDefault(require("nconf"));
+const path_1 = __importDefault(require("path"));
+const exceptionMiddleware = __importStar(require("../middlewares/exceptions.middleware.js"));
 //import helmet from "helmet";
 //import proxy from "http-proxy-middleware";
-export class App {
+class App {
     constructor(controllers) {
-        this.app = express();
-        this._mainFolder = config.get('WEBROOT');
-        this._stataicFolder = config.get('STATIC_FILES');
-        this._port = config.get("PORT");
+        this.app = express_1.default();
+        this._mainFolder = nconf_1.default.get('WEBROOT');
+        this._stataicFolder = nconf_1.default.get('STATIC_FILES');
+        this._port = nconf_1.default.get("PORT");
         this.initializeDatabase();
         this.initializeMiddlewares();
         this.initializeAuthenticators();
@@ -39,9 +51,9 @@ export class App {
                 res.set('x-timestamp', Date.now());
             }
         };
-        let folderPath = path.join(this._mainFolder, this._stataicFolder);
-        this.app.use(config.get('MAIN_FILE_URL'), express.static(folderPath));
-        this.app.use(express.static("build/web_modules"));
+        let folderPath = path_1.default.join(this._mainFolder, this._stataicFolder);
+        this.app.use(nconf_1.default.get('MAIN_FILE_URL'), express_1.default.static(folderPath));
+        // this.app.use(express.static("build/web_modules"));
         //this.app.use()
     }
     initializeAuthenticators() {
@@ -58,4 +70,5 @@ export class App {
     async initializeDatabase() {
     }
 }
+exports.App = App;
 //# sourceMappingURL=main.router.js.map

@@ -2,7 +2,7 @@ var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
-var ts = require('gulp-typescript');
+//var ts = require('gulp-typescript');
 const config = require('nconf');
 config.file('config/default.json');
 
@@ -41,7 +41,7 @@ async function css()
     });
 
    // await gulp.watch(['node_modules/bootstrap/scss/bootstrap.scss', 'src/scss/*.scss'], sassCSS);
-    await gulp.watch(['lib/public/css/*.css'], css);
+    await gulp.watch(['settings/public/css/*.css'], css);
     await gulp.watch(["settings/views/*.html","settings/public/js/*.js","settings/*.html","settings/public/css/*.css","**/build/**/*"]).on('change',(path,stats)=> browserSync.reload());
 };
 

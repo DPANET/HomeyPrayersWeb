@@ -1,7 +1,7 @@
 {
     "extends": "../../tsconfig.json",
     "target": "ESNext", 
-    "module": "ESNext", 
+    "module": "commonjs", 
     "lib": [
       "es2018",
       "dom"
@@ -9,6 +9,8 @@
     "include": [
    "js/**/*"
     ],
+    "declaration": false,
+    "sourceMap": true,
     "exclude": [
      
    ]

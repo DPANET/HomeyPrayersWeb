@@ -56,7 +56,7 @@ export class App {
     let folderPath:string = path.join(this._mainFolder,this._stataicFolder);
     
     this.app.use(config.get('MAIN_FILE_URL'),express.static( folderPath));
-    this.app.use(express.static("build/web_modules"));
+   // this.app.use(express.static("build/web_modules"));
     //this.app.use()
  
 }

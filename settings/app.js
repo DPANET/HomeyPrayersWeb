@@ -1,13 +1,18 @@
-import nconf from 'nconf';
-nconf.file('config/default.json');
-process.env.DEBUG = nconf.get("DEBUG");
-import mainController from "./controllers/main.controller";
-import { App } from "./routes/main.router";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const nconf_1 = __importDefault(require("nconf"));
+nconf_1.default.file('config/default.json');
+process.env.DEBUG = nconf_1.default.get("DEBUG");
+const main_controller_1 = __importDefault(require("./controllers/main.controller"));
+const main_router_1 = require("./routes/main.router");
 async function init() {
     let app;
     try {
         //mongoose.connections.forEach((value)=>value.close());
-        app = new App([new mainController()]);
+        app = new main_router_1.App([new main_controller_1.default()]);
         // let eventProvider:events.ConfigEventProvider = new events.ConfigEventProvider("config/config.json");
         // let eventListener:events.ConfigEventListener = new events.ConfigEventListener();
         // eventProvider.registerListener(eventListener);

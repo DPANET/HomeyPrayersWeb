@@ -1,4 +1,6 @@
-export class ExceptionMiddleware {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class ExceptionMiddleware {
     constructor() {
     }
     errorMiddleware(error, request, response, next) {
@@ -12,4 +14,5 @@ export class ExceptionMiddleware {
         });
     }
 }
+exports.ExceptionMiddleware = ExceptionMiddleware;
 //# sourceMappingURL=exceptions.middleware.js.map

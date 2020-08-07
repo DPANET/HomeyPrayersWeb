@@ -1,12 +1,13 @@
 //import $ = require('jquery');
+import moment from "moment";
+import Noty from "noty";
 import * as prayerlib from "@dpanet/prayers-lib/lib/entities/prayer";
 import * as locationlib from "@dpanet/prayers-lib/lib/entities/location";
 import * as prayerConfig from "@dpanet/prayers-lib/lib/configurators/inteface.configuration";
 import * as prayerValidator from "@dpanet/prayers-lib/lib/validators/interface.validators";
 import * as prayerConfigValidator from "@dpanet/prayers-lib/lib/validators/validator";
-import moment from "moment";
-import Noty from "noty";
-import google from "@google/maps";
+
+const google = require( "@google/maps");
 //import { isNullOrUndefined } from 'util';
 // const DataTable = require("datatables.net")(window, $);
 //const daterangepicker = require("daterangepicker");

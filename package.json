@@ -6,14 +6,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "compile:ESNext": "tsc --p src/public -m ESNext",
-    "bundlejs": "browserify lib/public/js/settings.js -p [tinyify] > lib/public/js/bundle.js -v --m --im --ignore crypto --ignore google",
-    "debug": "browserify src/public/js/settings.ts -p [tsify] > lib/public/js/bundle.js --debug -v --m --im --ignore crypto --ignore google",
-    "html:copy": "copyfiles -u 1 src/**.html lib",
-    "css:copy": "copyfiles -u 1 src/css/**.css lib/",
-    "images:copy": "copyfiles -u 1 src/images/**/* lib/",
-    "server:normal": "node lib/app.js",
-    "server:debug": "node --inspect-brk=9119 lib/app.js",
-    "run:parallel": "npm-run-all -p compile:ESNext server:normal",
+    "bundlejs": "browserify settings/public/js/settings.js settings/public/js/notifications.js -p [tinyify] > settings/public/js/bundle.js -v --m --im --ignore crypto --ignore @google/maps",
+    "debug": "browserify src/public/js/settings.ts -p [tsify] > settings/public/js/bundle.js --debug -v --m --im --ignore crypto --ignore google",
+    "html:copy": "copyfiles -u 1 src/**.html settings",
+    "css:copy": "copyfiles -u 1 src/css/**.css settings/",
+    "images:copy": "copyfiles -u 1 src/images/**/* settings/",
+    "server:normal": "node settings/app.js",
+    "server:debug": "node --inspect-brk=9119 settings/app.js",
+    "run:parallel": "npm-run-all -p bundlejs server:normal",
     "run:paralleldebug": "npm-run-all -p compile:ESNext server:debug parallel",
     "wait": "wait-on http://localhost:7000/",
     "parallel": "npm run bundlejs",
@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/DPANET/HomeyPrayersWeb#readme",
   "dependencies": {
-    "@google/maps": "^1.1.3",
     "@hapi/joi": "^17.1.1",
     "es-module-shims": "^0.4.7",
     "express": "^4.17.1",
@@ -42,7 +41,7 @@
     "noty": "^3.2.0-beta"
   },
   "devDependencies": {
-    "@dpanet/prayers-lib": "^1.9.8",
+    "@dpanet/prayers-lib": "^1.9.9",
     "@types/datatables.net": "^1.10.19",
     "@types/daterangepicker": "^3.1.1",
     "@types/express": "^4.17.7",
@@ -52,6 +51,7 @@
     "@types/jquery": "^3.5.1",
     "@types/moment": "^2.13.0",
     "@types/nconf": "^0.10.0",
+    "browser-sync": "^2.26.12",
     "datatables": "^1.10.18",
     "datatables.net": "^1.10.21",
     "datatables.net-responsive": "^2.2.5",
@@ -67,7 +67,7 @@
     "tsify": "^4.0.2"
   },
   "directories": {
-    "lib": "lib"
+    "settings": "settings"
   },
   "browser": {},
   "description": ""

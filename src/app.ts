@@ -22,7 +22,7 @@ async function init(): Promise<void> {
         // setTimeout(() => {
         //     app.listen();
         // }, 5000);
-        const server:Server = app.listen();
+        const server:Server =  app.listen();
 
         process.on('SIGINT', async () => {
             server.close(async () => {

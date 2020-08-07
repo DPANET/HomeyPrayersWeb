@@ -1,12 +1,18 @@
-import Noty from "noty";
-export function notify(type, message) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const noty_1 = __importDefault(require("noty"));
+function notify(type, message) {
     let noty = loadNotification();
     noty.setType(type, true);
     noty.setText(message, true);
     noty.show();
 }
-export function loadNotification() {
-    return new Noty({
+exports.notify = notify;
+function loadNotification() {
+    return new noty_1.default({
         layout: 'top',
         theme: "bootstrap-v4",
         type: "error",
@@ -23,4 +29,5 @@ export function loadNotification() {
         killer: false,
     });
 }
+exports.loadNotification = loadNotification;
 //# sourceMappingURL=notifications.js.map

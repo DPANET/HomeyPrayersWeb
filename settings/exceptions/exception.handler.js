@@ -1,31 +1,39 @@
-export class HttpException extends Error {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class HttpException extends Error {
     constructor(status, message) {
         super(message);
     }
 }
-export class UserWithThatEmailAlreadyExistsException extends HttpException {
+exports.HttpException = HttpException;
+class UserWithThatEmailAlreadyExistsException extends HttpException {
     constructor(email) {
         super(404, `user with email ${email} not found`);
     }
 }
-export class WrongCredentialsException extends HttpException {
+exports.UserWithThatEmailAlreadyExistsException = UserWithThatEmailAlreadyExistsException;
+class WrongCredentialsException extends HttpException {
     constructor() {
         super(404, `Wrong Password provided`);
     }
 }
-export class PostNotFoundException extends HttpException {
+exports.WrongCredentialsException = WrongCredentialsException;
+class PostNotFoundException extends HttpException {
     constructor(id) {
         super(404, `Post with id ${id} not found`);
     }
 }
-export class AuthenticationTokenMissingException extends HttpException {
+exports.PostNotFoundException = PostNotFoundException;
+class AuthenticationTokenMissingException extends HttpException {
     constructor() {
         super(404, 'Authentication Token Missing');
     }
 }
-export class WrongAuthenticationTokenException extends HttpException {
+exports.AuthenticationTokenMissingException = AuthenticationTokenMissingException;
+class WrongAuthenticationTokenException extends HttpException {
     constructor() {
         super(404, 'Authentication Token Missing');
     }
 }
+exports.WrongAuthenticationTokenException = WrongAuthenticationTokenException;
 //# sourceMappingURL=exception.handler.js.map

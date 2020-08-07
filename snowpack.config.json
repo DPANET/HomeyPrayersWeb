@@ -1,4 +1,8 @@
 {
+  "alias":
+  {
+    "../entities/prayer":"@dpanet/prayers-lib/lib/entities/prayer"
+  },
   "installOptions":
   {
     "sourceMap": true,
@@ -12,13 +16,19 @@
 
   ],
   "install":[
-    "es-module-shims"]
+    "es-module-shims",
+    "@hapi/joi",
+    "@dpanet/prayers-lib/lib/entities/location",
+    "@dpanet/prayers-lib/lib/util/isNullOrUndefined"
+  ]
   ,
   "proxy": {
     
     "/login": "http://localhost/login"
   },
-  "buildOptions": { "clean":true },
+  "buildOptions": { 
+    "clean":true,
+    "minify":false  },
   "scripts":
   {
     
