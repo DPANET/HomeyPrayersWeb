@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.json",
+    "target": "ESNext", 
+    "module": "ESNext", 
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "include": [
+   "js/**/*"
+    ],
+    "exclude": [
+     
+   ]
+  }

@@ -18,15 +18,15 @@ async function sassCSS() {
 };
 async function css()
 {
-    return await gulp.src('lib/public/css/*.css')
+    return await gulp.src('settings/public/css/*.css')
     .pipe( browserSync.stream());
 
 }
 
 // Move the javascript files into our /src/js folder
  async function js () {
-    return await gulp.src(['lib/bundle.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
-        .pipe(gulp.dest("src/js"))
+    return await gulp.src(['build/web_module/**/*'])
+        .pipe(gulp.dest("settings/js"))
         .pipe(browserSync.stream());
 };
 // Starts a BrowerSync instance
@@ -35,14 +35,14 @@ async function css()
  async function serve (cb) {
 
     await browserSync.init(null,{
-        files: ["../lib/"],
+        files: ["../settings/"],
         proxy: "http://localhost:" + port,
         port: browserPort
     });
 
    // await gulp.watch(['node_modules/bootstrap/scss/bootstrap.scss', 'src/scss/*.scss'], sassCSS);
     await gulp.watch(['lib/public/css/*.css'], css);
-    await gulp.watch(["lib/views/*.html","lib/public/js/*.js","lib/*.html","lib/public/css/*.css","**/build/**/*"]).on('change',(path,stats)=> browserSync.reload());
+    await gulp.watch(["settings/views/*.html","settings/public/js/*.js","settings/*.html","settings/public/css/*.css","**/build/**/*"]).on('change',(path,stats)=> browserSync.reload());
 };
 
 exports.default = gulp.series(serve);

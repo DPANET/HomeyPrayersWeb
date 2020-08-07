@@ -3,13 +3,10 @@
   {
     "sourceMap": true,
     "dest": "/web_modules",
-    "installTypes":true,
-    "alias": {
-      "@dpanet/prayers-lib": "@dpanet/prayers-lib"
-    }
+    "installTypes":true
   },
   "exclude":[
-     "!**/lib/public/js/**/*",
+     "!**/settings/public/js/**/*",
     "**/node_modules/**/*",
     "**/src/**/*"
 
