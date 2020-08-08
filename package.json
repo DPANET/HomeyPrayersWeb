@@ -33,7 +33,6 @@
   "homepage": "https://github.com/DPANET/HomeyPrayersWeb#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "es-module-shims": "^0.4.7",
     "express": "^4.17.1",
     "googleapi": "^1.0.2",
     "moment": "^2.27.0",
@@ -41,7 +40,7 @@
     "noty": "^3.2.0-beta"
   },
   "devDependencies": {
-    "@dpanet/prayers-lib": "^1.9.9",
+    "@dpanet/prayers-lib": "^1.9.13",
     "@types/datatables.net": "^1.10.19",
     "@types/daterangepicker": "^3.1.1",
     "@types/express": "^4.17.7",

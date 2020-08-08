@@ -34,7 +34,7 @@ export async function buildObject() {
 }
 async function loadPrayerLocation() {
     return await $.ajax({
-        url: `${mainURL}/PrayerManager/PrayersLocation`,
+        url: `${mainURL}/PrayerManager/PrayersLocationSettings`,
         // error: genericErrorHandler,
         dataType: "json",
         success: (prayersLocation: locationlib.ILocationSettings) => {
@@ -46,7 +46,8 @@ function loadLocationSettings(prayersLocation:locationlib.ILocationSettings)
 {
     $("#city").val(`${prayersLocation.city}/ ${prayersLocation.countryCode}`);
     $("#coordinates").val(`(${prayersLocation.latitude},${prayersLocation.longtitude})`);
-    $("#time-zone").val(`(${prayersLocation.timeZoneId})`); 
+   // $("#time-zone").val(`(${prayersLocation.timeZoneId})`); 
+   $("#coordinates").data("location",prayersLocation);
 }
 function initForm() {
     $("#view-button").on("click", refreshDataTable);
@@ -169,20 +170,26 @@ function refreshLocationConfig():prayerConfig.ILocationConfig{
     coordinates=coordinates.replace("(","");
     coordinates=coordinates.replace(")","");
     latlngArray= coordinates.split(",");
-    let latlng:prayerConfig.ILocationConfig= {
-        location:{
-            latitude:parseFloat(latlngArray[0]),
-            longtitude:parseFloat(latlngArray[1]),
+    let latlng:locationlib.ILocationSettings= $("#coordinates").data("location");
+    let locationConfig:prayerConfig.ILocationConfig=
     
+    {
+        location:{
+            latitude:latlng.latitude,
+            longtitude:latlng.longtitude,
+            city:latlng.city,
+            countryCode:latlng.countryCode,
+            countryName:latlng.countryName,
+            address:latlng.city
         },
         timezone:{
-            timeZoneId:null,
-            timeZoneName:null,
-            rawOffset:null,
-            dstOffset:null
+            timeZoneId:latlng.timeZoneId,
+            timeZoneName:latlng.timeZoneName,
+            rawOffset:latlng.rawOffset,
+            dstOffset:latlng.dstOffset
         }
     }
-    return latlng;
+    return locationConfig;
 }
 function validatePrayerForm(prayersConfig: prayerConfig.IPrayersConfig): boolean {
 
@@ -240,14 +247,26 @@ async function saveDataTable() {
         let locationValidationResult:boolean = validateLocationForm(locationConfig);
         if  (prayerValidationResult && locationValidationResult) {
           await  $.ajax({
-                url: `${mainURL}/PrayerManager/PrayersViewMobile`, type: "POST",
-                data:JSON.stringify(
+                url: `${mainURL}/PrayerManager/PrayersByCalculation`, type: "POST",
+                data:
+                // (d) => {
+                //     try {
+                //         let config={ "prayerConfig":refreshPrayerConfigForm(),
+                //         "locationConfig": refreshLocationConfig()}
+                //         return config;
+                //     }
+                //     catch (err) {
+                //         //notify("error", err.message);
+                //     }
+                // },
+                JSON.stringify(
                 { "prayerConfig":refreshPrayerConfigForm(),
                 "locationConfig": refreshLocationConfig()}),// JSON.stringify(prayersConfig),
                 dataType: "json",
                 //crossDomain:true,
+                processData:true,
                 contentType: "application/json; charset=utf-8",
-                // error: genericErrorHandler,
+                 error: dataRefreshErrorHandler,
                 success: () => notify("success", "Configuration is saved")
             }).catch((jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => { throw new Error(jqXHR.responseJSON.message) });
 
@@ -265,7 +284,7 @@ async function loadDataTable() {
     await $('#prayers-table-mobile').DataTable(
         {
             ajax: {
-                url: `${mainURL}/PrayerManager/PrayersViewMobile`,
+                url: `${mainURL}/PrayerManager/PrayersByCalculation`,
                 type: 'GET',
                 dataType: "json",
                 data: (d) => {

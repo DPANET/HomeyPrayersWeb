@@ -61,8 +61,9 @@ initMap();
 
 function fillInAddress()
 {
-  place= autocomplete.getPlace();
-  $("#city").val(place.formatted_address);
-  $("#coordinates").val(`(${place.geometry.location.lat()},${place.geometry.location.lng()})`);
+  document.getElementById('search-button').click();
+  // place= autocomplete.getPlace();
+  // $("#city").val(place.formatted_address);
+  // $("#coordinates").val(`(${place.geometry.location.lat()},${place.geometry.location.lng()})`);
 
 }
